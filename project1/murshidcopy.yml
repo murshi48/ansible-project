@@ -1,0 +1,17 @@
+---
+- name: Copy file to remote server
+  hosts: webserver  # Replace with your target host or group
+  become: yes  # Use sudo if required
+  tasks:
+    - name: Copy file from local to remote server
+      copy:
+        src: /home/synnefo/ansible/project1
+        dest: /home/synnefo/project/project1  # Replace with the destination
+        owner: synnefo
+        group: murshii
+        mode: "0644"
+
+    - name: Print echo message
+      debug:
+        msg: "File has been copied successfully from /home/synnefo/ansible/project1"
+

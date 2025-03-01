@@ -1,0 +1,36 @@
+---
+- hosts: webserver
+  vars:
+    student_name: nandana
+    is_enable: false
+    students_list:
+      - mridul
+      - anu
+      - dora
+    student_marks:
+      mridul: 85
+      murshi: 90
+      anamika: 85
+
+  tasks:
+    - name: string variable
+      debug:
+        var: student_name
+
+    - name: boolean check
+      debug:
+        msg: "variable is true"
+      when: is_enable
+
+    - name: list variables
+      debug:
+        var: students_list
+
+    - name: list - reference
+      debug:
+        var: students_list[0]
+
+    - name: print dictionary variable
+      debug:
+        msg: "mridul's mark is {{ student_marks['mridul'] }}"
+

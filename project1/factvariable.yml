@@ -1,0 +1,42 @@
+---
+- name: Gather system information for AlmaLinux
+  hosts: webserver
+  gather_facts: yes
+  tasks:
+    - name: Display OS distribution
+      debug:
+        msg: "OS Distribution: {{ ansible_facts['distribution'] }}"
+
+    - name: Display OS family
+      debug:
+        msg: "OS Family: {{ ansible_facts['os_family'] }}"
+
+    - name: Display CPU details
+      debug:
+        msg: "CPU Model: {{ ansible_facts['processor'] }}"
+
+    - name: Display IP address
+      debug:
+        msg: "IP Address: {{ ansible_facts['default_ipv4']['address'] }}"
+
+    - name: Display Memory details
+      debug:
+        msg: "Memory (RAM): {{ ansible_facts['memtotal_mb'] }} MB"
+
+    - name: Display Hostname
+      debug:
+        msg: "Hostname: {{ ansible_facts['hostname'] }}"
+
+    - name: Display Current logged-in user
+      shell: "whoami"
+      register: logged_in_user
+      changed_when: false
+
+    - name: Show the current logged-in user
+      debug:
+        msg: "Current Logged-in User: {{ logged_in_user.stdout }}"
+
+    - name: Display Release scheme
+      debug:
+        msg: "Release Scheme: {{ ansible_facts['distribution_version'] }}"
+

@@ -1,0 +1,20 @@
+---
+- name: Set root password and ensure correct authentication plugin
+  hosts: webserver
+  become: yes
+
+  vars:
+    mysql_root_password: "asd123"  # Define your root password here
+    
+  tasks:
+    - name: Set root password and ensure correct authentication plugin
+      mysql_user:
+        name: root
+        password: "{{ asd123. }}"
+        host: "{{ mysql_host | default('%') }}"
+        login_user: root
+        login_password: "{{ asd123. }}"
+        plugin: mysql_native_password
+        state: present
+        check_implicit_admin: yes
+

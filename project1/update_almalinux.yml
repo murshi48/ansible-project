@@ -1,0 +1,10 @@
+---
+- name: Update system packages on AlmaLinux
+  hosts: webserver  # Modify this to your specific group of hosts or 'all'
+  become: yes  # Ensure root privileges to update packages
+  tasks:
+    - name: Update all packages to the latest version
+      dnf:
+        name: "*"
+        state: latest  # Ensure the latest version of each package is installed
+

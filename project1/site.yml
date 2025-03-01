@@ -1,0 +1,31 @@
+---
+
+- name: Setup Web Server on AlmaLinux
+  hosts: webserver
+  become: yes  # Run as root
+
+  tasks:
+    - name: Install Nginx
+      dnf:
+        name: nginx
+        state: present  # Correct value (use 'latest' if you want the newest version)
+
+    - name: Start and enable Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Open HTTP port in the firewall
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+      notify: Restart firewalld
+
+  handlers:
+    - name: Restart firewalld
+      service:
+        name: firewalld
+        state: reloaded
+

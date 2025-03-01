@@ -1,0 +1,28 @@
+---
+- name: Setup Web Server on AlmaLinux
+  hosts: webserver
+  become: yes  # Run as root
+
+  tasks:
+    - name: Install NGINX
+      tags:
+        - install
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Start NGINX service
+      service:
+        name: nginx
+        state: started
+        enabled: true
+      tags:
+        - install
+
+    - name: Remove NGINX
+      tags:
+        - remove
+      dnf:
+        name: nginx
+        state: absent
+

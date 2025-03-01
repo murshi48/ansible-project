@@ -1,0 +1,11 @@
+---
+- name: Add a user and add them to the sudo group
+  hosts: webserver
+  become: yes  # Use sudo to run the tasks as a privileged user
+  tasks:
+    - name: Create a user
+      user:
+        name: murshii  # User variable to be provided
+        state: present
+        groups: wheel  
+        append: yes  

@@ -1,0 +1,21 @@
+---
+- name: webserver setup
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: copy confiq.file
+      copy:
+        src: /home/synnefo/ansible/project1/hosts
+        dest: /etc/httpd/conf/httpd.conf
+        owner: synnefo
+        group: root
+        mode: "0644"
+      notify: restart apache
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+ 
+
